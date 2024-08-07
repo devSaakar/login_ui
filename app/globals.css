@@ -26,8 +26,20 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-between {
+    @apply flex justify-between items-center;
   }
 }

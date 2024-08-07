@@ -8,10 +8,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      spacing: {
+        "105": "26.25rem",
+        "116": "28.9375rem",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        transparent: "transparent",
+        grayCool: {
+          1: "#27292D",
+          2: "#6B6C70",
+          3: "#C5C7CA",
+        },
       },
     },
   },
