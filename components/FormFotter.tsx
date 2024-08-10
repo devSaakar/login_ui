@@ -1,7 +1,8 @@
 import React from "react";
 import Typography from "./ui/Typography";
-import { formDetails, FormType } from "@/constants";
+import { formDetails } from "@/constants";
 import Link from "next/link";
+import { FormType } from "@/types/formTypes.type";
 
 interface FormFotterProps {
   type: FormType;

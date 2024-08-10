@@ -1,4 +1,4 @@
-import { InputType } from "@/components/ui/Input";
+import { FieldType, InputType } from "@/types/formTypes.type";
 
 export const signInFormObject = {
   emailOrUsername: {
@@ -19,37 +19,50 @@ export const signInFormObject = {
   },
 };
 
+export const postFormObj = {
+  postMessage: {
+    fieldType: FieldType.Textarea,
+    type: InputType.Textarea,
+    id: "postMessage",
+    label: "Create Post",
+    placeholder: "How are you feeling today?",
+    value: "",
+    hide: false,
+  },
+};
+
 export const signUpFormObject = {
   email: {
+    fieldType: FieldType.Input,
     type: InputType.Email,
     id: "email",
     label: "Email",
     placeholder: "Enter your email",
     value: "",
     hide: false,
+    showIcon: false,
   },
   userName: {
+    fieldType: FieldType.Input,
     type: InputType.Text,
     id: "username",
     label: "Username",
     placeholder: "Enter your username",
     value: "",
     hide: false,
+    showIcon: false,
   },
   password: {
+    fieldType: FieldType.Input,
     type: InputType.Password,
     id: "password",
     label: "Password",
     placeholder: "Enter your password",
     value: "",
     hide: false,
+    showIcon: true,
   },
 };
-
-export enum FormType {
-  SignIn = "SignIn",
-  SignUp = "SignUp",
-}
 
 export const formDetails = {
   SignIn: {
@@ -63,5 +76,11 @@ export const formDetails = {
     footerText: "Already have an account?",
     ctaText: "Login →",
     redirectLink: "/sign-in",
+  },
+  Post: {
+    buttonText: "Post",
+    footerText: "",
+    ctaText: "",
+    redirectLink: "",
   },
 };

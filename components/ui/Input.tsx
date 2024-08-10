@@ -1,13 +1,6 @@
 import React from "react";
 import Typography from "./Typography";
-export enum InputType {
-  Text = "text",
-  Email = "email",
-  Password = "password",
-  Number = "number",
-  Tel = "tel",
-  Url = "url",
-}
+import { InputType } from "@/types/formTypes.type";
 
 interface InputProps {
   type: InputType;
@@ -17,7 +10,7 @@ interface InputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   label: string;
-  showExtraComponent?: boolean;
+  showIcon?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,7 +21,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
   placeholder,
   label,
-  showExtraComponent = false,
+  showIcon = false,
 }) => {
   return (
     <div className="w-full">
@@ -38,7 +31,7 @@ const Input: React.FC<InputProps> = ({
             {label}
           </Typography>
         </label>
-        {type === InputType.Password && showExtraComponent && (
+        {type === InputType.Password && showIcon && (
           <Typography size="xs" weight="semibold" className="text-grayCool-3">
             Forgot password?
           </Typography>
