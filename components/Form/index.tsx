@@ -67,12 +67,11 @@ const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
   const validateInputFields = (fieldValues: Record<string, string>) => {
     const errors: Record<string, string> = {};
     Object.keys(fieldValues).forEach((inputField) => {
-      if (formObj[inputField]?.required && fieldValues[inputField] === "") {
+      if (formObj[inputField]?.required && !fieldValues[inputField]) {
         errors[inputField] = "This field is required";
-      } else {
-        errors[inputField] = "";
       }
     });
+    console.log("errors", errors);
     if (Object.keys(errors).length) {
       setErrors(errors);
       return false;
