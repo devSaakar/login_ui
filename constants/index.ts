@@ -2,6 +2,7 @@ import { FieldType, InputType } from "@/types/formTypes.type";
 
 export const signInFormObject = {
   emailOrUsername: {
+    fieldType: FieldType.Input,
     type: InputType.Text,
     id: "emailOrUsername",
     label: "Email or Username",
@@ -11,6 +12,7 @@ export const signInFormObject = {
     iconInput: false,
   },
   password: {
+    fieldType: FieldType.Input,
     type: InputType.Password,
     id: "password",
     label: "Password",
@@ -87,7 +89,7 @@ export const formDetails = {
   },
   Post: {
     buttonText: "Post",
-    buttonClassName: "w-28 self-end",
+    buttonClassName: "w-28 ",
     footerText: "",
     ctaText: "",
     redirectLink: "",

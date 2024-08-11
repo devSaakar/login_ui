@@ -13,8 +13,15 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ data }) => {
-  const { name, time, content, comments, edited, imageURL, postMessageIcon } =
-    data;
+  const {
+    name,
+    time,
+    postMessage,
+    comments,
+    edited,
+    imageURL,
+    postMessageIcon,
+  } = data;
   return (
     <div className="post bg-grayCool-1 p-4 rounded-lg mb-3 flex flex-col gap-4">
       <div className="flex justify-between items-center">
@@ -47,7 +54,7 @@ const Post: React.FC<PostProps> = ({ data }) => {
             <RoundedEmoji emoji={postMessageIcon} />
           </div>
           <Typography size="base" className="text-gray-300 mb-2">
-            {content}
+            {postMessage}
           </Typography>
         </div>
       </Container>

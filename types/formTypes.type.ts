@@ -24,3 +24,8 @@ export interface CustomInputEvent {
     value: string;
   };
 }
+
+export type FormInputChangeEvent =
+  | React.ChangeEvent<HTMLInputElement>
+  | React.ChangeEvent<HTMLTextAreaElement>
+  | CustomInputEvent;

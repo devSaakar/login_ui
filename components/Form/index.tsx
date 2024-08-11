@@ -5,8 +5,8 @@ import { emojis, formDetails } from "@/constants";
 import Skeleton from "../ui/Skeleton";
 import PostInput from "../ui/PostInput";
 import {
-  CustomInputEvent,
   FieldType,
+  FormInputChangeEvent,
   FormType,
   InputType,
 } from "@/types/formTypes.type";
@@ -23,48 +23,46 @@ interface FormObjType {
   showIcon?: boolean;
 }
 
-interface UserCredentialsFormProps {
-  formObj: Record<string, FormObjType>;
+type FormObjectType = Record<string, FormObjType>;
+
+interface FormProps {
+  formObj: FormObjectType;
   formType: FormType;
   handleSubmit: (obj: Record<string, string>) => void;
 }
 
-const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
-  handleSubmit,
-  formObj,
-  formType,
-}) => {
+const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
   const { buttonText, buttonClassName } = formDetails[formType];
   const [fieldValues, setFieldValues] = useState<Record<string, string>>({});
 
+  const setInitialValues = (formObj: FormObjectType) => {
+    let newFormData = JSON.parse(JSON.stringify(formObj));
+    let newFieldValues: Record<string, string> = {};
+    Object.keys(newFormData).forEach((inputField) => {
+      if (newFormData[inputField]?.iconInput) {
+        newFieldValues[getIconName(inputField)] = emojis[0];
+      }
+      newFieldValues[inputField] = "";
+    });
+    setFieldValues(newFieldValues);
+  };
+
   useEffect(() => {
     if (formObj) {
-      let newFormData = JSON.parse(JSON.stringify(formObj));
-      let newFieldValues: Record<string, string> = {};
-      Object.keys(newFormData).forEach((inputField) => {
-        if (newFormData[inputField]?.iconInput) {
-          newFieldValues[getIconName(inputField)] = emojis[1];
-        }
-        newFieldValues[inputField] = "";
-      });
-      setFieldValues(newFieldValues);
+      setInitialValues(formObj);
     }
   }, [formObj]);
 
-  const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-      | CustomInputEvent
-  ) => {
+  const handleChange = (event: FormInputChangeEvent) => {
     const { name, value } = event.target;
-    console.log("name,value", name, value);
     setFieldValues({ ...fieldValues, [name]: value });
   };
 
   const handleSubmitClick = (event: React.FormEvent) => {
     event.preventDefault();
+    console.log("fieldValues", fieldValues);
     handleSubmit(fieldValues);
+    setInitialValues(formObj);
   };
   return (
     <form onSubmit={handleSubmitClick} className="w-full flex flex-col gap-3">
@@ -124,4 +122,4 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
   );
 };
 
-export default UserCredentialsForm;
+export default Form;

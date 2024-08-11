@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`p-3 rounded bg-blue-500 text-white hover:bg-blue-600 ${
+      className={`p-3 rounded bg-blue-500 text-white hover:bg-blue-600 self-end ${
         className || "w-full"
       }`}
     >

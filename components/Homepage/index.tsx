@@ -1,19 +1,20 @@
 "use client";
 import React, { useState } from "react";
 import Typography from "../ui/Typography";
-import UserCredentialsForm from "../UserCredentialsForm";
+import Form from "../Form";
 import { postFormObj } from "@/constants";
 import { userDetails } from "@/constants/apiResponse";
 import { FormType } from "@/types/formTypes.type";
 import Posts from "../Posts";
 import Container from "../ui/Container";
-import EmojiInput from "../ui/EmojiInput";
-import Tooltip from "../ui/Tooltip";
-
+import SignIn from "@/components/SignIn";
+import Modal from "../ui/Modal";
 const Homepage: React.FC = () => {
   const { communityEngagementText, welcomeMessage } = userDetails;
 
   const handlePost = () => {};
+
+  const [showModal, setShowModal] = useState(true);
   return (
     <div className="post-container w-175  text-white p-4 rounded-lg shadow-lg mx-auto">
       <div className="header w-116">
@@ -28,7 +29,7 @@ const Homepage: React.FC = () => {
         </Typography>
       </div>
       <Container className="mb-3 bg-grayCool-1 p-6">
-        <UserCredentialsForm
+        <Form
           handleSubmit={handlePost}
           formObj={postFormObj}
           formType={FormType.Post}
@@ -36,6 +37,10 @@ const Homepage: React.FC = () => {
       </Container>
 
       <Posts />
+
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <SignIn setShowModal={setShowModal} />
+      </Modal>
     </div>
   );
 };
