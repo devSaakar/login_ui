@@ -42,8 +42,6 @@ const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     }
   }, [showModal, user, pathname]);
 
-  console.log("user AppWrapper", user);
-
   return (
     <div>
       <Toast />

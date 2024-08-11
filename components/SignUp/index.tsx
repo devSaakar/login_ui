@@ -19,8 +19,6 @@ const SignUp: React.FC<SignUnProps> = ({ setShowModal }) => {
       username: signUpFieldObject.username,
       email: signUpFieldObject.email,
     };
-
-    console.log("signUpFieldObject", signUpFieldObject);
     setUser(newUser);
   };
 

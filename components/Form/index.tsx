@@ -71,7 +71,6 @@ const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
         errors[inputField] = "This field is required";
       }
     });
-    console.log("errors", errors);
     if (Object.keys(errors).length) {
       setErrors(errors);
       return false;

@@ -15,6 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <title>{"Sakar - Atlys App"}</title>
       <body className={inter.className}>
         <Suspense fallback={<div>Loading...</div>}>
           <UserProvider>
