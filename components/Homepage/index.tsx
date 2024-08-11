@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Typography from "../ui/Typography";
 import Form from "../Form";
-import { userDetails } from "@/constants/apiResponse";
+import { heroSectionDetails } from "@/constants/apiResponse";
 import { FormType } from "@/types/formTypes.type";
 import Posts from "../Posts";
 import Container from "../ui/Container";
@@ -11,7 +11,7 @@ import { capitalizeFirstLetter } from "@/utils/utils";
 import { postFormObj } from "@/constants/FormData/postForm";
 const Homepage: React.FC = () => {
   const { user } = useUser();
-  const { communityEngagementText, welcomeMessage } = userDetails;
+  const { communityEngagementText } = heroSectionDetails;
 
   const handlePost = () => {};
   return (

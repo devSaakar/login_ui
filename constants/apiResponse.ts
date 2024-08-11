@@ -33,9 +33,7 @@ export const posts: PostSchema[] = [
   },
 ];
 
-export const userDetails = {
-  welcomeMessage: "Hello Jane",
-  name: "Jane",
+export const heroSectionDetails = {
   communityEngagementText: `How are you doing today? Would you like to share something with the
           community 🤗`,
 };
