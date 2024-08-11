@@ -1,29 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import { emojis, formDetails } from "@/constants";
+import { emojis } from "@/constants";
 import Skeleton from "../ui/Skeleton";
 import PostInput from "../ui/PostInput";
 import {
   FieldType,
   FormInputChangeEvent,
+  FormObjectType,
   FormType,
   InputType,
 } from "@/types/formTypes.type";
 import { getIconName } from "@/utils/utils";
-
-interface FormObjType {
-  fieldType?: FieldType;
-  type: InputType;
-  id: string;
-  label: string;
-  placeholder: string;
-  value: string;
-  hide: boolean;
-  showIcon?: boolean;
-}
-
-type FormObjectType = Record<string, FormObjType>;
+import formDetails from "@/constants/FormData/formDetails";
+import { useToast } from "@/customHooks/useToast";
 
 interface FormProps {
   formObj: FormObjectType;
@@ -32,7 +22,9 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
+  const { addToast } = useToast();
   const { buttonText, buttonClassName } = formDetails[formType];
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [fieldValues, setFieldValues] = useState<Record<string, string>>({});
 
   const setInitialValues = (formObj: FormObjectType) => {
@@ -55,25 +47,54 @@ const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
 
   const handleChange = (event: FormInputChangeEvent) => {
     const { name, value } = event.target;
-    setFieldValues({ ...fieldValues, [name]: value });
+    const newFieldValues = { ...fieldValues, [name]: value };
+    setFieldValues(newFieldValues);
+    if (name in errors) {
+      validateInputFields(newFieldValues);
+    }
   };
 
   const handleSubmitClick = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("fieldValues", fieldValues);
-    handleSubmit(fieldValues);
-    setInitialValues(formObj);
+    if (validateInputFields(fieldValues)) {
+      handleSubmit(fieldValues);
+      setInitialValues(formObj);
+    } else {
+      addToast("Fill Required Fields", "error");
+    }
   };
+
+  const validateInputFields = (fieldValues: Record<string, string>) => {
+    const errors: Record<string, string> = {};
+    Object.keys(fieldValues).forEach((inputField) => {
+      if (formObj[inputField]?.required && fieldValues[inputField] === "") {
+        errors[inputField] = "This field is required";
+      } else {
+        errors[inputField] = "";
+      }
+    });
+    if (Object.keys(errors).length) {
+      setErrors(errors);
+      return false;
+    }
+    return true;
+  };
+
   return (
     <form onSubmit={handleSubmitClick} className="w-full flex flex-col gap-3">
       {Object.keys(fieldValues).length ? (
         Object.keys(formObj)?.map((inputField: string) => {
-          let showExtraComponent = false;
-          const { type, placeholder, label, id, hide, showIcon, fieldType } =
-            formObj[inputField];
-          if (type === InputType.Password && formType === FormType.SignIn) {
-            showExtraComponent = true;
-          }
+          const {
+            type,
+            placeholder,
+            label,
+            id,
+            hide,
+            showExtraComponent,
+            fieldType,
+            showIcon,
+          } = formObj[inputField];
+          const error = errors[inputField];
           if (hide) return null;
 
           switch (fieldType) {
@@ -88,7 +109,8 @@ const Form: React.FC<FormProps> = ({ handleSubmit, formObj, formType }) => {
                   name={inputField}
                   onChange={handleChange}
                   placeholder={placeholder}
-                  showIcon={showIcon}
+                  showExtraComponent={showExtraComponent}
+                  error={Boolean(error)}
                 />
               );
 

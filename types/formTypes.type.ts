@@ -1,3 +1,18 @@
+export interface FormObjType {
+  fieldType?: FieldType;
+  type: InputType;
+  id: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  hide: boolean;
+  required: boolean;
+  showIcon?: boolean;
+  showExtraComponent?: boolean;
+}
+
+export type FormObjectType = Record<string, FormObjType>;
+
 export enum InputType {
   Text = "text",
   Email = "email",
@@ -29,3 +44,8 @@ export type FormInputChangeEvent =
   | React.ChangeEvent<HTMLInputElement>
   | React.ChangeEvent<HTMLTextAreaElement>
   | CustomInputEvent;
+
+export enum FormTypeQuery {
+  signIn = "signIn",
+  signUp = "signUp",
+}

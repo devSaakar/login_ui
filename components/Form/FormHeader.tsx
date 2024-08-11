@@ -1,7 +1,8 @@
 import React, { Dispatch, SetStateAction } from "react";
-import Typography from "./ui/Typography";
+import Typography from "../ui/Typography";
 import Image from "next/image";
 import CrossIcon from "@/public/icons/cross.svg";
+import { useToast } from "@/customHooks/useToast";
 
 interface FormHeaderProps {
   title: string;
@@ -14,6 +15,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
   subtitle,
   setShowModal,
 }) => {
+  const { addToast } = useToast();
   return (
     <div
       id="form_header"
@@ -22,6 +24,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
       {setShowModal && (
         <div
           onClick={(e) => {
+            addToast("Login first to access Posts", "error");
             setShowModal(false);
           }}
           className="absolute -right-4 -top-4 cursor-pointer p-2 rounded-full bg-black"
