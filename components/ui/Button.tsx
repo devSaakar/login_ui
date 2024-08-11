@@ -17,7 +17,9 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      className={`w-full p-3 rounded bg-blue-500 text-white hover:bg-blue-600 ${className}`}
+      className={`p-3 rounded bg-blue-500 text-white hover:bg-blue-600 ${
+        className || "w-full"
+      }`}
     >
       {children}
     </button>

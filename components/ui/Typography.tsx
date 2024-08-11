@@ -1,7 +1,7 @@
 import React from "react";
 
 interface TypographyProps {
-  size: "xs" | "sm" | "base" | "lg";
+  size: "xs" | "sm" | "base" | "lg" | "xxxlg";
   weight?: "normal" | "medium" | "semibold";
   children: React.ReactNode;
   className?: string;
@@ -18,6 +18,7 @@ const Typography: React.FC<TypographyProps> = ({
     sm: "text-sm", // 14px
     base: "text-base", // 16px
     lg: "text-lg", // 18px
+    xxxlg: "text-3xl", // 30px
   };
 
   const weightClasses = {

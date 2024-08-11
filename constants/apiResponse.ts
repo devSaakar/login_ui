@@ -5,6 +5,8 @@ export interface PostSchema {
   content: string;
   comments: number;
   edited?: boolean;
+  imageURL: string;
+  postMessageIcon: string;
 }
 
 export const posts: PostSchema[] = [
@@ -15,6 +17,8 @@ export const posts: PostSchema[] = [
     content:
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
     comments: 24,
+    imageURL: "/images/users/user1.png",
+    postMessageIcon: "👋",
   },
   {
     id: 2,
@@ -24,6 +28,8 @@ export const posts: PostSchema[] = [
       "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
     comments: 18,
     edited: true,
+    imageURL: "/images/users/user2.png",
+    postMessageIcon: "😞",
   },
 ];
 

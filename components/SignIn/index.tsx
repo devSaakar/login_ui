@@ -3,8 +3,9 @@ import React from "react";
 import UserCredentialsForm from "../UserCredentialsForm";
 import Container from "../ui/Container";
 import FormHeader from "../FormHeader";
-import { FormType, signInFormObject } from "@/constants";
+import { signInFormObject } from "@/constants";
 import FormFotter from "../FormFotter";
+import { FormType } from "@/types/formTypes.type";
 
 const LoginForm: React.FC = () => {
   const handleSignIn = (signInFieldObject: Record<string, string>) => {

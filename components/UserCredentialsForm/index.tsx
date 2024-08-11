@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-import { formDetails } from "@/constants";
+import { emojis, formDetails } from "@/constants";
 import Skeleton from "../ui/Skeleton";
-import TextArea from "../ui/TextArea";
-import { FieldType, FormType, InputType } from "@/types/formTypes.type";
+import PostInput from "../ui/PostInput";
+import {
+  CustomInputEvent,
+  FieldType,
+  FormType,
+  InputType,
+} from "@/types/formTypes.type";
+import { getIconName } from "@/utils/utils";
 
 interface FormObjType {
   fieldType?: FieldType;
@@ -28,7 +34,7 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
   formObj,
   formType,
 }) => {
-  const { buttonText } = formDetails[formType];
+  const { buttonText, buttonClassName } = formDetails[formType];
   const [fieldValues, setFieldValues] = useState<Record<string, string>>({});
 
   useEffect(() => {
@@ -36,6 +42,9 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
       let newFormData = JSON.parse(JSON.stringify(formObj));
       let newFieldValues: Record<string, string> = {};
       Object.keys(newFormData).forEach((inputField) => {
+        if (newFormData[inputField]?.iconInput) {
+          newFieldValues[getIconName(inputField)] = emojis[1];
+        }
         newFieldValues[inputField] = "";
       });
       setFieldValues(newFieldValues);
@@ -46,8 +55,10 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
     event:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLTextAreaElement>
+      | CustomInputEvent
   ) => {
     const { name, value } = event.target;
+    console.log("name,value", name, value);
     setFieldValues({ ...fieldValues, [name]: value });
   };
 
@@ -58,7 +69,7 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
   return (
     <form onSubmit={handleSubmitClick} className="w-full flex flex-col gap-3">
       {Object.keys(fieldValues).length ? (
-        Object.keys(formObj)?.map((inputField) => {
+        Object.keys(formObj)?.map((inputField: string) => {
           let showExtraComponent = false;
           const { type, placeholder, label, id, hide, showIcon, fieldType } =
             formObj[inputField];
@@ -83,9 +94,9 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
                 />
               );
 
-            case FieldType.Textarea:
+            case FieldType.PostInput:
               return (
-                <TextArea
+                <PostInput
                   key={id + formType}
                   id={id}
                   label={label}
@@ -94,6 +105,8 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
                   onChange={handleChange}
                   placeholder={placeholder}
                   showIcon={showIcon}
+                  iconName={getIconName(inputField)}
+                  iconValue={fieldValues[getIconName(inputField)]}
                 />
               );
 
@@ -104,7 +117,9 @@ const UserCredentialsForm: React.FC<UserCredentialsFormProps> = ({
       ) : (
         <Skeleton className="h-16" />
       )}
-      <Button type="submit">{buttonText}</Button>
+      <Button className={buttonClassName} type="submit">
+        {buttonText}
+      </Button>
     </form>
   );
 };

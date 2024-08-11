@@ -1,6 +1,5 @@
 export enum InputType {
   Text = "text",
-  Textarea = "textarea",
   Email = "email",
   Password = "password",
   Number = "number",
@@ -10,11 +9,18 @@ export enum InputType {
 
 export enum FieldType {
   Input = "Input",
-  Textarea = "Textarea",
+  PostInput = "PostInput",
 }
 
 export enum FormType {
   SignIn = "SignIn",
   SignUp = "SignUp",
   Post = "Post",
+}
+
+export interface CustomInputEvent {
+  target: {
+    name: string;
+    value: string;
+  };
 }

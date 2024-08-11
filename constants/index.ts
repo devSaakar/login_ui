@@ -8,6 +8,7 @@ export const signInFormObject = {
     placeholder: "Enter your email or username",
     value: "",
     hide: false,
+    iconInput: false,
   },
   password: {
     type: InputType.Password,
@@ -16,18 +17,7 @@ export const signInFormObject = {
     placeholder: "Enter your password",
     value: "",
     hide: false,
-  },
-};
-
-export const postFormObj = {
-  postMessage: {
-    fieldType: FieldType.Textarea,
-    type: InputType.Textarea,
-    id: "postMessage",
-    label: "Create Post",
-    placeholder: "How are you feeling today?",
-    value: "",
-    hide: false,
+    iconInput: false,
   },
 };
 
@@ -41,6 +31,7 @@ export const signUpFormObject = {
     value: "",
     hide: false,
     showIcon: false,
+    iconInput: false,
   },
   userName: {
     fieldType: FieldType.Input,
@@ -51,6 +42,7 @@ export const signUpFormObject = {
     value: "",
     hide: false,
     showIcon: false,
+    iconInput: false,
   },
   password: {
     fieldType: FieldType.Input,
@@ -61,26 +53,59 @@ export const signUpFormObject = {
     value: "",
     hide: false,
     showIcon: true,
+    iconInput: false,
+  },
+};
+
+export const postFormObj = {
+  postMessage: {
+    fieldType: FieldType.PostInput,
+    type: InputType.Text,
+    id: "postMessage",
+    label: "Create Post",
+    placeholder: "How are you feeling today?",
+    value: "",
+    hide: false,
+    iconInput: true,
   },
 };
 
 export const formDetails = {
   SignIn: {
     buttonText: "Login now",
+    buttonClassName: "",
     footerText: "Not registered yet?",
     ctaText: "Register →",
     redirectLink: "/sign-up",
   },
   SignUp: {
     buttonText: "Continue",
+    buttonClassName: "",
     footerText: "Already have an account?",
     ctaText: "Login →",
     redirectLink: "/sign-in",
   },
   Post: {
     buttonText: "Post",
+    buttonClassName: "w-28 self-end",
     footerText: "",
     ctaText: "",
     redirectLink: "",
   },
 };
+
+export const emojis = ["💬", "😂", "👋", "😞"];
+
+enum Emoji {
+  Message = "Message",
+  Laugh = "Laugh",
+  Hi = "Hi",
+  Sad = "Sad",
+}
+
+// export const emojiMapping = {
+//   Message: "💬",
+//   Laugh : "😂",
+//   Hi : "👋",
+//   Sad : "😞",
+// };

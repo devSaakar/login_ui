@@ -12,6 +12,8 @@ const config: Config = {
         "19.5": "4.875rem",
         "105": "26.25rem",
         "116": "28.9375rem",
+        "145": "36.25rem",
+        "175": "43.75rem",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -24,6 +26,8 @@ const config: Config = {
           1: "#27292D",
           2: "#6B6C70",
           3: "#C5C7CA",
+          4: "#7F8084",
+          5: "#191920",
         },
       },
     },

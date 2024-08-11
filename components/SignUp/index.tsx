@@ -3,8 +3,9 @@ import React from "react";
 import Container from "../ui/Container";
 import FormHeader from "../FormHeader";
 import UserCredentialsForm from "../UserCredentialsForm";
-import { FormType, signUpFormObject } from "@/constants";
+import { signUpFormObject } from "@/constants";
 import FormFotter from "../FormFotter";
+import { FormType } from "@/types/formTypes.type";
 
 const SignUp = () => {
   const handleSignUp = (signUpFieldObject: Record<string, string>) => {
