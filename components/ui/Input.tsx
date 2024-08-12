@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Typography from "./Typography";
 import { InputType } from "@/types/formTypes.type";
+import ToogleEyeIcon from "./ToogleEyeIcon";
 
 interface InputProps {
   type: InputType;
@@ -25,6 +26,13 @@ const Input: React.FC<InputProps> = ({
   showExtraComponent = false,
   error = false,
 }) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    console.log("isPasswordVisible", isPasswordVisible);
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
   return (
     <div className="w-full">
       <div className="flex-between w-full">
@@ -43,17 +51,29 @@ const Input: React.FC<InputProps> = ({
           </Typography>
         )}
       </div>
-      <input
-        name={name}
-        type={type}
-        id={id}
-        className={`w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none  ${
-          error ? "border-red-500" : "focus:border-blue-500"
-        }`}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
+      <div className="relative">
+        <input
+          name={name}
+          type={isPasswordVisible ? InputType.Text : type}
+          id={id}
+          className={`w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none  ${
+            error ? "border-red-500" : "border-blue-500"
+          }
+          ${type === InputType.Password ? "pr-10" : ""}
+          `}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
+        {type === InputType.Password && (
+          <div className="absolute right-4  top-1/2 transform -translate-y-1/2">
+            <ToogleEyeIcon
+              isPasswordVisible={isPasswordVisible}
+              togglePasswordVisibility={togglePasswordVisibility}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
