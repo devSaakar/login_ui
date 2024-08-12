@@ -29,7 +29,6 @@ const Input: React.FC<InputProps> = ({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
-    console.log("isPasswordVisible", isPasswordVisible);
     setIsPasswordVisible(!isPasswordVisible);
   };
 
@@ -57,7 +56,7 @@ const Input: React.FC<InputProps> = ({
           type={isPasswordVisible ? InputType.Text : type}
           id={id}
           className={`w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none  ${
-            error ? "border-red-500" : "border-blue-500"
+            error ? "border-red-500" : "focus:border-blue-500"
           }
           ${type === InputType.Password ? "pr-10" : ""}
           `}
