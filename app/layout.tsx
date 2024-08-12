@@ -5,6 +5,7 @@ import { UserProvider } from "@/customHooks/useUser";
 import AppWrapper from "@/components/AppWrapper";
 import { ToastProvider } from "@/customHooks/useToast";
 import { Suspense } from "react";
+import Loader from "@/components/ui/Loader";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
         content="This is the home page of our awesome Next.js application."
       />
       <body className={inter.className}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <UserProvider>
             <ToastProvider>
               <AppWrapper>{children}</AppWrapper>
