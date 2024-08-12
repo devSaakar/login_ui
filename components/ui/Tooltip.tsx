@@ -57,10 +57,11 @@ const Tooltip = ({
   const childRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: any) => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
       const show = Boolean(
-        childRef.current?.contains(event.target) ||
-          tooltipRef.current?.contains(event.target)
+        childRef.current?.contains(target) ||
+          tooltipRef.current?.contains(target)
       );
       setShow(show);
     };
