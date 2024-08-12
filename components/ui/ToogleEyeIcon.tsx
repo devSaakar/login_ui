@@ -14,7 +14,7 @@ const ToogleEyeIcon: React.FC<ToogleEyeIconProps> = ({
     togglePasswordVisibility();
   };
   return (
-    <button onClick={handleClick}>
+    <button onClick={handleClick}  aria-label="See Password">
       <svg
         className="shrink-0 size-2.8"
         width="20"
